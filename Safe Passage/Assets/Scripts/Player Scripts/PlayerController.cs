@@ -41,6 +41,7 @@ public class PlayerController : MonoBehaviour
 
         float x = Input.GetAxis("Horizontal");
         float z = Input.GetAxis("Vertical");
+        
 
         Vector3 move = transform.right * x + transform.forward * z;
 
@@ -55,6 +56,14 @@ public class PlayerController : MonoBehaviour
         controller.Move(velocity * Time.deltaTime);
 
         testing();
+    }
+
+    void Rotate(float dir)
+    {
+        if(dir > 0)
+        {
+            transform.Find("model").gameObject.transform.localRotation = Quaternion.Euler(0, 180, 0);
+        }
     }
 
     private void Update()
