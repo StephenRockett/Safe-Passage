@@ -58,8 +58,8 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\Player Scripts\PlayerController.cs" />
     <Compile Include="Assets\Scripts\Camera Scripts\YPosChanger.cs" />
-    <Compile Include="Assets\PlayerScript.cs" />
     <Compile Include="Assets\Scripts\Camera Scripts\CameraController.cs" />
+    <Compile Include="Assets\Scripts\MovingPlatformController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

@@ -26,6 +26,8 @@ public class PlayerController : MonoBehaviour
 
     public Transform target;
 
+    public GameObject test;
+
     // Update is called once per frame
     void FixedUpdate()
     {
@@ -51,6 +53,8 @@ public class PlayerController : MonoBehaviour
 
         velocity.y += gravity * mass * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
+
+        testing();
     }
 
     private void Update()
@@ -61,5 +65,13 @@ public class PlayerController : MonoBehaviour
     void ChangeDirection()
     {
         transform.LookAt(target);
+    }
+
+    void testing()
+    {
+        if (Input.GetKey(KeyCode.Space))
+        {
+            test.GetComponent<MovingPlatformController>().Move();
+        }
     }
 }
