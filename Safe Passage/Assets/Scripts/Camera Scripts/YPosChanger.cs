@@ -16,10 +16,9 @@ public class YPosChanger : MonoBehaviour
     {
         
     }
-
-    // Update is called once per frame
     void Update()
     {
+
         // get pos
         Vector3 pos = transform.position;
         // set object at same hieght as player
