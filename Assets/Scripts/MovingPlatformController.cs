@@ -9,6 +9,8 @@ public class MovingPlatformController : MonoBehaviour
 
     GameObject platform;
 
+    public Transform player;
+
     public float speed = 1f;
     public bool active = false;
     // Start is called before the first frame update
@@ -57,6 +59,22 @@ public class MovingPlatformController : MonoBehaviour
         else
         {
             PAtoPB();
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.tag == "Player")
+        {
+            player.parent = transform;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.tag == "Player")
+        {
+            player.parent = null;
         }
     }
 }

@@ -14,11 +14,10 @@ public class PlayerController : MonoBehaviour
     // player controller
     public CharacterController controller;
 
-    // gamebobject for ground check
-    public Transform groundCheck;
 
     // ground distance
     public float groundDistance = 1f;
+    public CapsuleCollider collder;
 
     // sets the layer that the ground is on
     public LayerMask groundMask;
@@ -31,24 +30,31 @@ public class PlayerController : MonoBehaviour
     void FixedUpdate()
     {
         // makes a sphere at ground check pos andcheck if ground layer is in it
-        isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
+        isGrounded = Physics.CheckSphere(collder.transform.position - new Vector3(0, .5f, 0), collder.radius, groundMask);
 
         // gets player movement input
         float x = Input.GetAxis("Horizontal");
         float z = Input.GetAxis("Vertical");
 
 
-        // does math to calculate player pos
-        Vector3 move = transform.right * x + transform.forward * z;
+        if (z != 0 || x != 0)
+        {
+            // does math to calculate player pos
+            Vector3 move = transform.right * x + transform.forward * z;
+            // moves the player via controller
+            controller.Move(move * speed * Time.deltaTime);
+        }
 
-        // moves the player via controller
-        controller.Move(move * speed * Time.deltaTime);
+
 
         // jump script and velocity
         JumpAndGravity();
 
     }
-
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawSphere(collder.transform.position - new Vector3(0,.5f,0), collder.radius );
+    }
     private void Update()
     {
         //changes where the player is looking
@@ -68,13 +74,16 @@ public class PlayerController : MonoBehaviour
             velocity.y += gravity * mass * Time.deltaTime;
         }
         // make sure the player is not moving or building up velocity
+
+        if (velocity.y != 0)
+        {
+            // makes the jump fall or jump
+            controller.Move(velocity * Time.deltaTime);
+        }
         else
         {
             velocity.y = 0;
         }
-
-        // makes the jump fall or jump
-        controller.Move(velocity * Time.deltaTime);
     }
 
     void ChangeDirection()
