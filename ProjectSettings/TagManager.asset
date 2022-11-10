@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Wall
   - MovingPlatform
+  - DeathBarrier
   layers:
   - Default
   - TransparentFX
