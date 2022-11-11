@@ -6,8 +6,11 @@ public class MovingPlatformController : MonoBehaviour
 {
     GameObject pointA;
     GameObject pointB;
+    public GameObject ScriptTurnOff;
+    public float timer;
+    bool activeIsTrue, activeWasTrue;
 
-    GameObject platform;
+    public GameObject platform, player;
 
     public float speed = 1f;
     public bool active = false;
@@ -19,6 +22,10 @@ public class MovingPlatformController : MonoBehaviour
         platform = transform.Find("platform").gameObject;
 
         platform.transform.position = pointA.transform.position;
+        timer = 0;
+        active = false;
+        activeIsTrue = false;
+        activeWasTrue = false;
     }
 
     // Update is called once per frame
@@ -28,13 +35,46 @@ public class MovingPlatformController : MonoBehaviour
         if (active)
         {
             platform.transform.position = Vector3.MoveTowards(platform.transform.position, pointB.transform.position, step);
-        }else if (!active)
+            activeIsTrue = true;
+
+        }
+        else if (!active)
         {
             platform.transform.position = Vector3.MoveTowards(platform.transform.position, pointA.transform.position, step);
+            activeIsTrue = false;
         }
         else
         {
             platform.transform.position = pointA.transform.position;
+            
+        }
+
+        if ((activeWasTrue && !activeIsTrue)|| (!activeWasTrue && activeIsTrue) && timer == 0)
+        {
+            timer = 1;
+        }
+
+        if (timer > 0)
+        {
+            player.transform.parent = platform.transform;
+            ScriptTurnOff.SetActive(false);
+            timer -= 1 * Time.deltaTime;
+        }
+        else
+        {
+            ScriptTurnOff.SetActive(true);
+            Transform player = platform.transform.Find("Player");
+            player.parent = null;
+            timer = 0;
+        }
+
+        if (activeIsTrue)
+        {
+            activeWasTrue = true;
+        }
+        else
+        {
+            activeWasTrue = false;
         }
     }
 
