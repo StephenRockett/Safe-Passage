@@ -11,7 +11,6 @@ public class ButtonController : MonoBehaviour
 
 
     bool inTrigger = false;
-    // Start is called before the first frame update
     void Start()
     {
         if(buttonTarget.tag == "MovingPlatform")

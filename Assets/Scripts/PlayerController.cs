@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour
     // player controller
     public CharacterController controller;
 
-    // gamebobject for ground check
+    // game object for ground check
     public Transform groundCheck;
 
     // ground distance

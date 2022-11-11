@@ -60,11 +60,11 @@ public class MovingPlatformController : MonoBehaviour
             ScriptTurnOff.SetActive(false);
             timer -= 1 * Time.deltaTime;
         }
-        else
+        else if (timer <= 0)
         {
             ScriptTurnOff.SetActive(true);
             Transform player = platform.transform.Find("Player");
-            player.parent = null;
+            //player.parent = null;
             timer = 0;
         }
 

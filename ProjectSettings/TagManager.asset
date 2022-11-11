@@ -7,6 +7,9 @@ TagManager:
   - Wall
   - MovingPlatform
   - DeathBarrier
+  - vpTut1Coll
+  - vpTut2Coll
+  - vpFallColl
   layers:
   - Default
   - TransparentFX
