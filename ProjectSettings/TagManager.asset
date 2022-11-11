@@ -10,6 +10,9 @@ TagManager:
   - vpTut1Coll
   - vpTut2Coll
   - vpFallColl
+  - vpDoctColl
+  - vpIntroColl
+  - vpEndColl
   layers:
   - Default
   - TransparentFX

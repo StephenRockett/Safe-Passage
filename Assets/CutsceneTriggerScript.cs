@@ -4,17 +4,18 @@ using UnityEngine;
 
 public class CutsceneTriggerScript : MonoBehaviour
 {
-    public GameObject player, ScriptTurnOff, vpCamera;
+    public GameObject player, ScriptTurnOff, vpCamera, blackScreen;
 
 
-    public GameObject vpTut1, vpTut2, vpFall;
-    public GameObject GOvpTut1, GOvpTut2, GOvpFall;
+    public GameObject vpTut1, vpTut2, vpFall, vpIntro, vpEnd, vpDoct;
+    public GameObject GOvpTut1, GOvpTut2, GOvpFall, GOvpIntro, GOvpEnd, GOvpDoct;
 
     public bool cutWasPlaying, cutIsPlaying;
     float cutPlaying;
     void Start()
     {
         cutPlaying = 0;
+        blackScreen.SetActive(false);
     }
 
     void OnTriggerEnter(Collider TutColl)
@@ -39,6 +40,34 @@ public class CutsceneTriggerScript : MonoBehaviour
             cutPlaying = 2.5f;
             vpFall.SetActive(true);
         }
+        if (TutColl.transform.tag == "vpIntroColl")
+        {
+            print("vpIntroColl");
+            cutPlaying = 15f;
+            vpIntro.SetActive(true);
+            GOvpIntro.SetActive(false);
+        }
+        if (TutColl.transform.tag == "vpDoctColl")
+        {
+            print("vpDoctFall");
+            cutPlaying = 5f;
+            vpDoct.SetActive(true);
+            GOvpDoct.SetActive(false);
+        }
+
+
+        if (TutColl.transform.tag == "vpEndColl")
+        {
+            if (GOvpDoct.activeInHierarchy == false)
+            {
+                print("vpEndColl");
+                cutPlaying = 30f;
+                vpEnd.SetActive(true);
+                GOvpEnd.SetActive(false);
+                blackScreen.SetActive(true);
+            }
+            
+        }
     }
 
     void Update()
@@ -60,6 +89,9 @@ public class CutsceneTriggerScript : MonoBehaviour
             vpTut1.SetActive(false);
             vpTut2.SetActive(false);
             vpFall.SetActive(false);
+            vpIntro.SetActive(false);
+            vpEnd.SetActive(false);
+            vpDoct.SetActive(false);
         }
 
 
